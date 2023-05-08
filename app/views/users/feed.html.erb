@@ -1,0 +1,120 @@
+<div>
+  <h1>
+    <%= @current_user.username %>
+  </h1>
+
+  <dl>
+    <dt>
+      Private
+    </dt>
+    <dd>
+      <%= @current_user.private %>
+    </dd>
+
+    <dt>
+      Followers
+    </dt>
+    <dd>
+      <%= @current_user.receivedfollowrequests.count %>
+    </dd>
+
+    <dt>
+      Following
+    </dt>
+    <dd>
+      <%= @current_user.sentfollowrequests.count %>
+    </dd>
+
+    <nav>
+      <ul>
+        <li>
+          <a href="/users/<%= @current_user.username %>">Profile</a>
+        </li>
+        <li>
+          <a href="/users/<%= @current_user.username %>/liked_photos">Liked photos</a>
+        </li>
+        <li>
+          <a href="/users/<%= @current_user.username %>/feed">Feed</a>
+        </li>
+        <li>
+          <a href="/users/<%= @current_user.username %>/discover">Discover</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+
+  <h2>Feed (<%= @current_user.sentfollowrequests.where({ :status => "accepted"}).count %>) 
+
+  </h2>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Caption
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Posted
+        </th>
+
+        <th>
+          Likes
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <%# array of follow requests %>
+
+      <% accepted_follows = @current_user.sentfollowrequests.where({ :status => "accepted"}) %>
+      <% accepted_follows.each do |f| %>
+        <% f.following_photos.each do |p| %>
+          <tr>
+            <td>
+              <img src="<%= p.image %>" class="img-responsive">
+            </td>
+
+            <td>
+              <%= p.caption  %>
+            </td>
+
+            <td>
+              <%= p.owner.username  %>
+            </td>
+
+            <td>
+              <%=  %>
+            </td>
+            <td>
+              <%=  %>
+            </td>
+
+            <% if @current_user != nil %>
+              <td>
+                <a href="/photos/<%=  %>">
+                  Show details
+                </a>
+              </td>
+            <% else %>
+              <td>
+                <a href="/user_sign_in">
+                  Show details
+                </a>
+              </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>

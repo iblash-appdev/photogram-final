@@ -20,10 +20,10 @@
 
     <dl>
       <dt>
-        Fan
+        Fam
       </dt>
       <dd>
-        <%= @the_like.fan_id %>
+        <%= @the_like.fam_id %>
       </dd>
 
       <dt>
@@ -61,11 +61,11 @@
 
     <form action="/modify_like/<%= @the_like.id %>"  method="post" >
       <div>
-        <label for="fan_id_box">
-          Fan
+        <label for="fam_id_box">
+          Fam
         </label>
 
-        <input type="text" id="fan_id_box" name="query_fan_id" value="<%= @the_like.fan_id %>">
+        <input type="text" id="fam_id_box" name="query_fam_id" value="<%= @the_like.fam_id %>">
       </div>
 
       <div>

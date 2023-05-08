@@ -1,0 +1,115 @@
+<div>
+<h1>
+      <%= @current_user.username %>
+    </h1>
+
+    <dl>
+      <dt>
+        Private
+      </dt>
+      <dd>
+        <%= @current_user.private %>
+      </dd>
+
+      <dt>
+        Followers
+      </dt>
+      <dd>
+        <%= @current_user.receivedfollowrequests.count %>
+      </dd>
+
+        <dt>
+          Following
+        </dt>
+        <dd>
+          <%= @current_user.sentfollowrequests.count %>
+        </dd>
+
+              <nav>
+        <ul>
+          <li>
+            <a href="/users/<%= @current_user.username %>">Profile</a>
+          </li>
+          <li>
+            <a href="/users/<%= @current_user.username %>/liked_photos">Liked photos</a>
+          </li>
+          <li>
+            <a href="/users/<%= @current_user.username %>/feed">Feed</a>
+          </li>
+          <li>
+            <a href="/users/<%= @current_user.username %>/discover">Discover</a>
+          </li>
+        </ul>
+      </nav>
+
+</div>
+
+
+<h2>Liked photos (<%= @current_user.likes.count %>) </h2>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Caption
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Posted
+        </th>
+
+        <th>
+          Likes
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @current_user.likes.each do |a_like| %>
+        <tr>
+
+          <td>
+            <img src="<%= a_like.photo.image %>" class="img-responsive">
+          </td>
+
+          <td>
+            <%= a_like.photo.caption %>
+          </td>
+
+          <td>
+            <%= a_like.photo.owner.username %>
+          </td>
+
+          <td>
+            <%= time_ago_in_words(a_like.photo.created_at) %> ago
+          </td>
+          <td>
+            <%= a_like.photo.likes_count %>
+          </td>
+
+<% if @current_user != nil %>
+          <td>
+            <a href="/photos/<%= a_like.photo.id %>">
+              Show details
+            </a>
+          </td>
+          <% else %>
+          <td>
+            <a href="/user_sign_in">
+              Show details
+            </a>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
