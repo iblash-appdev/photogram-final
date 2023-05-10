@@ -1,40 +1,23 @@
 Rails.application.routes.draw do
-  # Routes for the User account:
-
-  # SIGN UP FORM
-  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
-  # CREATE RECORD
-  post("/insert_user", { :controller => "user_authentication", :action => "create"  })
-      
-  # EDIT PROFILE FORM        
-  get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })       
-  # UPDATE RECORD
-  post("/modify_user", { :controller => "user_authentication", :action => "update" })
-  
-  # DELETE RECORD
-  get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
-
-  # ------------------------------
-
-  # SIGN IN FORM
-  get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
-  # AUTHENTICATE AND STORE COOKIE
-  post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
-  
-  # SIGN OUT        
-  get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
-             
-  #------------------------------
-
   # Routes for the Like resource:
+
+  get("/", { :controller => "application", :action => "index" }) 
+  get("/users", { :controller => "application", :action => "index" }) 
+  get("/users/:path_username", { :controller => "application", :action => "show" })
+  get("/users/:path_username/liked_photos", { :controller => "application", :action => "liked_photos" })
+  get("/users/:path_username/feed", { :controller => "application", :action => "feed" })
+  get("/users/:path_username/discover", { :controller => "application", :action => "discover" })
+  
 
   # CREATE
   post("/insert_like", { :controller => "likes", :action => "create" })
+ 
           
   # READ
   get("/likes", { :controller => "likes", :action => "index" })
   
   get("/likes/:path_id", { :controller => "likes", :action => "show" })
+
   
   # UPDATE
   
@@ -100,6 +83,33 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_photo/:path_id", { :controller => "photos", :action => "destroy" })
 
+  #------------------------------
+
+  # Routes for the User account:
+
+  # SIGN UP FORM
+  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
+  # CREATE RECORD
+  post("/insert_user", { :controller => "user_authentication", :action => "create"  })
+      
+  # EDIT PROFILE FORM        
+  get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })       
+  # UPDATE RECORD
+  post("/modify_user", { :controller => "user_authentication", :action => "update" })
+  
+  # DELETE RECORD
+  get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
+
+  # ------------------------------
+
+  # SIGN IN FORM
+  get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
+  # AUTHENTICATE AND STORE COOKIE
+  post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
+  
+  # SIGN OUT        
+  get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
+             
   #------------------------------
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

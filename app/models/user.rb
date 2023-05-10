@@ -4,7 +4,6 @@
 #
 #  id              :integer          not null, primary key
 #  avatar          :string
-#  comments_count  :integer
 #  email           :string
 #  likes_count     :integer
 #  password_digest :string
