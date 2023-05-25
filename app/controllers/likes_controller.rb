@@ -54,4 +54,3 @@ class LikesController < ApplicationController
     redirect_to("/likes", { :notice => "Like deleted successfully."} )
   end
 end
-
